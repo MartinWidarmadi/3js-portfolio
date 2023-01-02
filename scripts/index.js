@@ -60,10 +60,11 @@ loader.load('./glbf/tablet.glb', (glb) => {
   scene.add(tablet);
 });
 
-loader.load('./glbf/mouse.glb', (glb) => {
+loader.load('./glbf/mousenew.glb', (glb) => {
   let mouse = glb.scene;
-  mouse.scale.set(2,2,2);
-  mouse.position.set(0,2,0);
+  mouse.scale.set(1,1,1);
+  mouse.position.set(4,10.9,1);
+  mouse.rotation.y = 4
   scene.add(mouse);
 })
 
