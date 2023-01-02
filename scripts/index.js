@@ -60,6 +60,13 @@ loader.load('./glbf/tablet.glb', (glb) => {
   scene.add(tablet);
 });
 
+loader.load('./glbf/mouse.glb', (glb) => {
+  let mouse = glb.scene;
+  mouse.scale.set(2,2,2);
+  mouse.position.set(0,2,0);
+  scene.add(mouse);
+})
+
 // light
 const directionalRightFrontLight = new THREE.DirectionalLight(0x000000, 5);
 const helper1 = new THREE.DirectionalLightHelper(directionalRightFrontLight, 5, 0xff0000);
