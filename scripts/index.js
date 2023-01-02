@@ -68,6 +68,14 @@ loader.load('./glbf/mousenew.glb', (glb) => {
   scene.add(mouse);
 })
 
+loader.load('./glbf/keyboard.glb', (glb) => {
+  let keyboard = glb.scene;
+  keyboard.scale.set(2,2,2);
+  keyboard.position.set(0,10.65,1.3);
+  keyboard.rotation.y = 0.2
+  scene.add(keyboard);
+})
+
 // light
 const directionalRightFrontLight = new THREE.DirectionalLight(0x000000, 5);
 const helper1 = new THREE.DirectionalLightHelper(directionalRightFrontLight, 5, 0xff0000);
