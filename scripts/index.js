@@ -39,13 +39,13 @@ let mouse = {};
 addEventListener("mousedown", (e) => {
   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
   mouse.y = (e.clientY / window.innerHeight) * -2 + 1;
-  console.log(mouse);
+  // console.log(mouse);
 
   rayCast.setFromCamera(mouse, camera);
   let items = rayCast.intersectObjects(scene.children);
 
   items.forEach((i) => {
-    console.log(i);
+    console.log(i.object.name);
   })
 });
 
@@ -63,7 +63,7 @@ loader.load("./glbf/monitor.glb", (glb) => {
   monitor.scale.set(2, 2, 2);
   monitor.position.set(0, 9.5, -0.5);
   monitor.rotation.y = 0.12;
-  meja.name = "monitor";
+  monitor.name = "monitor";
   scene.add(monitor);
 });
 
@@ -72,7 +72,7 @@ loader.load("./glbf/kursi.glb", (glb) => {
   kursi.scale.set(2, 2, 2);
   kursi.position.set(0, 5.8, 7);
   kursi.rotation.y = 1;
-  meja.name = "kursi";
+  kursi.name = "kursi";
   scene.add(kursi);
 });
 
@@ -81,7 +81,7 @@ loader.load("./glbf/tablet.glb", (glb) => {
   tablet.scale.set(2, 2, 2);
   tablet.position.set(-4, 10.8, 2);
   tablet.rotation.y = 1;
-  meja.name = "tablet";
+  tablet.name = "tablet";
   scene.add(tablet);
 });
 
@@ -90,7 +90,7 @@ loader.load("./glbf/mousenew.glb", (glb) => {
   mouse.scale.set(1, 1, 1);
   mouse.position.set(4, 10.9, 1);
   mouse.rotation.y = 4;
-  meja.name = "mouse";
+  mouse.name = "mouse";
   scene.add(mouse);
 });
 
@@ -99,7 +99,7 @@ loader.load("./glbf/keyboard.glb", (glb) => {
   keyboard.scale.set(2, 2, 2);
   keyboard.position.set(0, 10.65, 1.3);
   keyboard.rotation.y = 0.2;
-  meja.name = "keyboard";
+  keyboard.name = "keyboard";
   scene.add(keyboard);
 });
 
