@@ -3,6 +3,7 @@ import * as THREE from "three";
 import { OrbitControls } from "../node_modules/three/examples/jsm/controls/OrbitControls.js";
 import { GLTFLoader } from "../node_modules/three/examples/jsm/loaders/GLTFLoader.js";
 import { DRACOLoader } from "../node_modules/three/examples/jsm/loaders/DRACOLoader.js";
+import { Group, Scene } from "three";
 
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xffe18f);
@@ -43,10 +44,19 @@ addEventListener("mousedown", (e) => {
 
   rayCast.setFromCamera(mouse, camera);
   let items = rayCast.intersectObjects(scene.children);
+  if (items.length > 0) {
+    if (items[1].object.parent.parent.type != 'Scene') {
+      console.log(items[1].object.parent.parent)
+    } else {
+      console.log(items[1].object.parent)
+    }
+      
+  }
 
-  items.forEach((i) => {
-    console.log(i.object.name);
-  })
+
+  // items.forEach((i) => {
+  //   console.log(i.object.parent);
+  // })
 });
 
 loader.load("./glbf/meja.glb", (glb) => {
@@ -55,6 +65,7 @@ loader.load("./glbf/meja.glb", (glb) => {
   meja.position.y = 4;
   meja.rotation.y = 9.6;
   meja.name = "meja";
+  // console.log(meja.children);
   scene.add(meja);
 });
 
@@ -64,6 +75,7 @@ loader.load("./glbf/monitor.glb", (glb) => {
   monitor.position.set(0, 9.5, -0.5);
   monitor.rotation.y = 0.12;
   monitor.name = "monitor";
+  console.log(monitor.children)
   scene.add(monitor);
 });
 
@@ -154,4 +166,5 @@ function animate() {
   controls.update();
   renderer.render(scene, camera);
 }
+
 animate();
