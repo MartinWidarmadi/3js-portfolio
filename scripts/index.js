@@ -46,7 +46,10 @@ addEventListener("mousedown", (e) => {
   let items = rayCast.intersectObjects(scene.children);
   if (items.length > 0) {
     if (items[1].object.parent.parent.type != 'Scene') {
-      console.log(items[1].object.parent.parent)
+      switch(items[1].object.parent.parent.name) {
+        case 'monitor':
+          gsap.to(camera.position, {x: 0, y:0, z:0})
+      }
     } else {
       console.log(items[1].object.parent)
     }
