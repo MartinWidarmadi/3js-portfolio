@@ -135,10 +135,13 @@ const rotateTo = (x, y, z) => {
   gsap.to(camera.rotation, { x: x, y: y, z: z });
 };
 
+var running = false;
 const turnOnPc = () => {
+  running = true;
   screen.style.visibility = 'visible';
   const martinPort = document.querySelector('#martin-port');
   const rifqiPort = document.querySelector('#rifqi-port');
+  const backBtn = document.querySelector('#back-button');
   const menu = document.querySelector('.portfolio-menu');
 
   martinPort.addEventListener('click', (e) => {
@@ -150,6 +153,11 @@ const turnOnPc = () => {
     menu.style.visibility = 'hidden';
     rifqiPage.style.visibility = 'visible';
   });
+
+  backBtn.addEventListener('click', (e) => {
+    turnOffPc();
+    running = false;
+  })
 };
 
 const turnOffPc = () => {
@@ -162,7 +170,7 @@ const rayCast = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
 const screen = document.querySelector('.screen');
-screen.style.visibility = 'hidden';
+// screen.style.display = 'none';
 
 const martinPage = document.querySelector('.martin-page');
 const rifqiPage = document.querySelector('.rifqi-page');
@@ -173,6 +181,7 @@ let isClicked = false;
 addEventListener('mousedown', (e) => {
   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
   mouse.y = (e.clientY / window.innerHeight) * -2 + 1;
+  console.log(e.button);
   // console.log(mouse);
 
   rayCast.setFromCamera(mouse, camera);
@@ -181,14 +190,14 @@ addEventListener('mousedown', (e) => {
     if (items[1].object.parent.parent.type != 'Scene') {
       switch (items[1].object.parent.parent.name) {
         case 'monitor':
-          isClicked = e.button == 0 ? true : false;
+          
+          // isClicked = e.button == 0 ? true : false;
 
-          if (isClicked) {
+          if (!running) {
             zoomTo(0.5, 13.5, 3);
             rotateTo(0, 0.1, 0);
-            setInterval(turnOnPc, 600);
-          } else {
-            turnOffPc();
+            const timeOut = setTimeout(turnOnPc, 600);
+            
           }
       }
     } else {
