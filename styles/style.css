@@ -10,6 +10,7 @@
 
 .screen {
   display: flex;
+  visibility: hidden;
   position: absolute;
   width: 60vw;
   height: 75vh;
