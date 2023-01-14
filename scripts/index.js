@@ -135,7 +135,9 @@ const rotateTo = (x, y, z) => {
   gsap.to(camera.rotation, { x: x, y: y, z: z });
 };
 
+var running = false;
 const turnOnPc = () => {
+  running = true;
   screen.style.visibility = 'visible';
   const martinPort = document.querySelector('#martin-port');
   const rifqiPort = document.querySelector('#rifqi-port');
@@ -154,6 +156,7 @@ const turnOnPc = () => {
 
   backBtn.addEventListener('click', (e) => {
     turnOffPc();
+    running = false;
   })
 };
 
@@ -190,11 +193,12 @@ addEventListener('mousedown', (e) => {
           
           // isClicked = e.button == 0 ? true : false;
 
-          // if (isClicked) {
+          if (!running) {
             zoomTo(0.5, 13.5, 3);
             rotateTo(0, 0.1, 0);
-            setInterval(turnOnPc, 600);
-          // }
+            const timeOut = setTimeout(turnOnPc, 600);
+            
+          }
       }
     } else {
       console.log(items[1].object.parent);
