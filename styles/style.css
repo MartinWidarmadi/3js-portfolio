@@ -4,39 +4,58 @@
   box-sizing: border-box;
 }
 
+html {
+  font-size: 10px;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
 .container {
   position: relative;
 }
 
+/* screen style */
 .screen {
-  display: flex;
   position: absolute;
-  width: 60vw;
-  height: 75vh;
-  left: 18%;
-  top: 4.5rem;
+  width: 100vw;
+  height: 100vh;
   background-color: #e8cb7b;
-  /* flex-direction: column; */
-  /* align-items: center; */
-  justify-content: center;
   border-radius: 10px;
   overflow-y: auto;
   padding: 5rem;
+  font-size: 2rem;
 }
 
+/* portfolio menu style */
 .portfolio-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 30vw;
+  height: 50vh;
   text-align: center;
+}
+
+.portfolio-menu h1 {
+  font-weight: 500;
+}
+
+.portfolio-menu p {
+  text-align: justify;
 }
 
 .btn {
   border: none;
   color: #fff;
-  background-image: linear-gradient(30deg, #0400ff, #4ce3f7);
+  background-image: linear-gradient(30deg, #957c38, #4ce3f7);
   border-radius: 5px;
   background-size: 100% auto;
   font-family: inherit;
   font-size: 17px;
-  padding: 0.6em 1.5em;
+  padding: 0.6rem 1.5rem;
   display: inline-block;
 }
 
@@ -64,4 +83,48 @@
   100% {
     box-shadow: 0 0 0 0 rgb(218 103 68 / 0%);
   }
+}
+
+/* martin page style */
+.martin-page {
+  padding: 5rem 0;
+}
+
+hr {
+  border: dashed 2px black;
+}
+
+.martin-page header section {
+  display: flex;
+  justify-content: space-evenly;
+  margin: 10rem 0;
+}
+
+.martin-page header section p {
+  width: 40rem;
+  margin-top: 1.5rem;
+  text-align: justify;
+}
+
+.martin-page header section img {
+  width: 40rem;
+}
+
+.martin-page header section:nth-child(odd) {
+  margin-left: -10rem;
+}
+
+.martin-page header section:nth-child(even) {
+  margin-right: -10rem;
+}
+
+.martin-page main {
+  padding-left: 10rem;
+}
+
+.martin-page main .skills ul {
+  list-style: none;
+}
+.martin-page main .skills ul li {
+  margin-top: 1rem;
 }
