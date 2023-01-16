@@ -135,29 +135,73 @@ const rotateTo = (x, y, z) => {
   gsap.to(camera.rotation, { x: x, y: y, z: z });
 };
 
+const screen = document.querySelector('.screen');
+screen.style.visbility = 'hidden';
+const menu = document.querySelector('.portfolio-menu');
+
+const martinPage = document.querySelector('.martin-page');
+const rifqiPage = document.querySelector('.rifqi-page');
+martinPage.style.display = 'none';
+rifqiPage.style.display = 'none';
+
+const backToMenu = document.querySelectorAll('.back-menu');
+console.log(backToMenu);
+
 var running = false;
 const turnOnPc = () => {
   running = true;
   screen.style.visibility = 'visible';
+  const backBtn = document.querySelector('#back-button');
+
   const martinPort = document.querySelector('#martin-port');
   const rifqiPort = document.querySelector('#rifqi-port');
-  const backBtn = document.querySelector('#back-button');
-  const menu = document.querySelector('.portfolio-menu');
 
   martinPort.addEventListener('click', (e) => {
-    menu.style.visibility = 'hidden';
-    martinPage.style.visibility = 'visible';
+    menu.style.display = 'none';
+    martinPage.style.display = 'block';
   });
 
   rifqiPort.addEventListener('click', (e) => {
-    menu.style.visibility = 'hidden';
-    rifqiPage.style.visibility = 'visible';
+    menu.style.display = 'none';
+    rifqiPage.style.display = 'block';
   });
 
   backBtn.addEventListener('click', (e) => {
     turnOffPc();
     running = false;
-  })
+  });
+
+  backToMenu.forEach((e) => {
+    e.addEventListener('click', () => {
+      menu.style.display = 'flex';
+      rifqiPage.style.display = 'none';
+      martinPage.style.display = 'none';
+    });
+  });
+
+  const projectItems = document.querySelector('.project-items');
+  martinProjects.forEach((project) => {
+    let card = document.createElement('div');
+    let cardTitle = document.createElement('h4');
+    let cardDescription = document.createElement('p');
+    let cardLink = document.createElement('a');
+
+    card.style.backgroundImage = `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('${project.img}')`;
+    card.style.backgroundSize = 'cover';
+    cardTitle.innerHTML = project.title;
+    cardDescription.innerHTML = project.description;
+    cardLink.innerHTML = 'Go ->';
+
+    card.classList.add('card');
+    cardTitle.classList.add('card-title');
+    cardDescription.classList.add('card-description');
+    cardLink.classList.add('btn', 'card-link');
+
+    card.appendChild(cardTitle);
+    card.appendChild(cardDescription);
+    card.appendChild(cardLink);
+    projectItems.appendChild(card);
+  });
 };
 
 const turnOffPc = () => {
@@ -168,15 +212,6 @@ const turnOffPc = () => {
 
 const rayCast = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
-
-const screen = document.querySelector('.screen');
-// screen.style.display = 'none';
-
-const martinPage = document.querySelector('.martin-page');
-const rifqiPage = document.querySelector('.rifqi-page');
-martinPage.style.visibility = 'hidden';
-rifqiPage.style.visibility = 'hidden';
-let isClicked = false;
 
 addEventListener('mousedown', (e) => {
   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
@@ -190,14 +225,12 @@ addEventListener('mousedown', (e) => {
     if (items[1].object.parent.parent.type != 'Scene') {
       switch (items[1].object.parent.parent.name) {
         case 'monitor':
-          
           // isClicked = e.button == 0 ? true : false;
 
           if (!running) {
             zoomTo(0.5, 13.5, 3);
             rotateTo(0, 0.1, 0);
             const timeOut = setTimeout(turnOnPc, 600);
-            
           }
       }
     } else {

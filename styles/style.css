@@ -19,13 +19,16 @@ body {
 /* screen style */
 .screen {
   display: flex;
-  visibility: hidden;
   position: absolute;
-  width: 100vw;
-  height: 100vh;
+  visibility: hidden;
+  left: 20vw;
+  top: 10vh;
+  width: 56vw;
+  height: 75vh;
   background-color: #e8cb7b;
   border-radius: 10px;
   overflow-y: auto;
+  overflow-x: hidden;
   padding: 5rem;
   font-size: 2rem;
 }
@@ -36,7 +39,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  width: 30vw;
+  width: 50vw;
   height: 50vh;
   text-align: center;
 }
@@ -89,7 +92,10 @@ body {
 
 /* martin page style */
 .martin-page {
-  padding: 5rem 0;
+  margin-left: -3rem;
+  margin-top: -2rem;
+  font-size: 1.5rem;
+  width: 50vw;
 }
 
 hr {
@@ -98,7 +104,6 @@ hr {
 
 .martin-page header section {
   display: flex;
-  justify-content: space-evenly;
   margin: 10rem 0;
 }
 
@@ -108,8 +113,12 @@ hr {
   text-align: justify;
 }
 
-.martin-page header section img {
-  width: 40rem;
+.martin-page header section .images {
+  width: 20rem;
+}
+
+.martin-page header section .images:nth-child(odd) {
+  margin-right: 20rem;
 }
 
 .martin-page header section:nth-child(odd) {
@@ -120,13 +129,49 @@ hr {
   margin-right: -10rem;
 }
 
-.martin-page main {
-  padding-left: 10rem;
-}
-
 .martin-page main .skills ul {
   list-style: none;
 }
 .martin-page main .skills ul li {
   margin-top: 1rem;
+}
+
+.martin-page main .projects .project-items {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.martin-page main .projects p {
+  margin-bottom: 1rem;
+}
+
+.martin-page footer {
+  height: 3rem;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+  width: 20rem;
+  padding: 1rem;
+  color: white;
+  border-radius: 3px;
+  justify-content: space-evenly;
+}
+
+.card-title {
+  font-size: large;
+  font-weight: 500;
+}
+
+.card-link {
+  text-decoration: none;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.card > *:not(:last-child) {
+  margin-bottom: 1rem;
 }
