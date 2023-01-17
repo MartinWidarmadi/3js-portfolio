@@ -5,9 +5,17 @@ import { GLTFLoader } from '../node_modules/three/examples/jsm/loaders/GLTFLoade
 import { DRACOLoader } from '../node_modules/three/examples/jsm/loaders/DRACOLoader.js';
 import { Group, Scene } from 'three';
 
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+const listener = new THREE.AudioListener();
+camera.add(listener);
+
+const sound = new THREE.Audio(listener);
+
+const audioLoader = new THREE.AudioLoader();
+
+
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0xffe18f);
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
 
 const renderer = new THREE.WebGLRenderer();
 renderer.setSize(window.innerWidth, window.innerHeight);
@@ -88,6 +96,17 @@ loader.load('./glbf/keyboard.glb', (glb) => {
   keyboard.name = 'keyboard';
   scene.add(keyboard);
 });
+
+loader.load('./glbf/text.glb', (glb) => {
+  let text = glb.scene;
+  text.scale.set(4,4,4);
+  text.position.set(-5,20,10);
+  text.rotation.x = Math.PI/2
+  text.rotation.z = -Math.PI/4
+  text.name = 'ase';
+  scene.add(text);
+  
+})
 
 // light
 const directionalRightFrontLight = new THREE.DirectionalLight(0x000000, 5);
@@ -213,6 +232,13 @@ const turnOffPc = () => {
 const rayCast = new THREE.Raycaster();
 const mouse = new THREE.Vector2();
 
+audioLoader.load('./audio/kobob.mp3', (audio) => {
+  console.log(audio);
+  sound.setBuffer(audio);
+  sound.setLoop(false);
+  sound.setVolume(0.5);
+})
+
 addEventListener('mousedown', (e) => {
   mouse.x = (e.clientX / window.innerWidth) * 2 - 1;
   mouse.y = (e.clientY / window.innerHeight) * -2 + 1;
@@ -232,9 +258,15 @@ addEventListener('mousedown', (e) => {
             rotateTo(0, 0.1, 0);
             const timeOut = setTimeout(turnOnPc, 600);
           }
+          break;
       }
     } else {
       console.log(items[1].object.parent);
+      switch (items[1].object.parent.name) {
+        case 'ase':
+          sound.play();
+          break;
+      }
     }
   }
   // items.forEach((i) => {
